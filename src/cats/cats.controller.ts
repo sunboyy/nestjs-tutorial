@@ -1,38 +1,19 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Param,
-  Body,
-  Query,
-  Put,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
+import { CatsService } from './cats.service';
+import { CreateCatDto } from './dto/create-cat.dto';
+import { Cat } from './interfaces/cat.interface';
 
 @Controller('cats')
 export class CatsController {
+  constructor(private readonly catsService: CatsService) {}
+
   @Post()
-  create(@Body() createCatDto): string {
-    return 'This action adds a new cat';
+  create(@Body() createCatDto: CreateCatDto) {
+    this.catsService.create(createCatDto);
   }
 
   @Get()
-  findAll(@Query() query): string {
-    return `This action returns all cats (limit: ${query.limit} items)`;
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id): string {
-    return `This action returns a #${id} cat`;
-  }
-
-  @Put(':id')
-  update(@Param('id') id: string, @Body() updateCatDto) {
-    return `This action updates a #${id} cat`;
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return `This action removes a #${id} cat`;
+  async findAll(): Promise<Cat[]> {
+    return this.catsService.findAll();
   }
 }
