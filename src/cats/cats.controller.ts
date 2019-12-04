@@ -12,11 +12,11 @@ import { AuthGuard } from '@nestjs/passport';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { Cat } from './interfaces/cat.interface';
-import { ValidationPipe } from 'src/common/pipes/validation.pipe';
-import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
-import { RolesGuard } from 'src/common/guards/roles.guard';
-import { LoggingInterceptor } from 'src/common/interceptors/logging.interceptor';
-import { Roles } from 'src/common/decorators/roles.decorator';
+import { ValidationPipe } from '../common/pipes/validation.pipe';
+import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
+import { RolesGuard } from '../common/guards/roles.guard';
+import { LoggingInterceptor } from '../common/interceptors/logging.interceptor';
+import { Roles } from '../common/decorators/roles.decorator';
 
 @Controller('cats')
 @UseInterceptors(LoggingInterceptor)
