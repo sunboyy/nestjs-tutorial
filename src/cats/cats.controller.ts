@@ -11,12 +11,12 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './dto/create-cat.dto';
-import { Cat } from './interfaces/cat.interface';
 import { ValidationPipe } from '../common/pipes/validation.pipe';
 import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { LoggingInterceptor } from '../common/interceptors/logging.interceptor';
 import { Roles } from '../common/decorators/roles.decorator';
+import { Cat } from './cat';
 
 @Controller('cats')
 @UseInterceptors(LoggingInterceptor)
@@ -37,7 +37,7 @@ export class CatsController {
   }
 
   @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id) {
+  async findOne(@Param('id', ParseIntPipe) id): Promise<Cat | undefined> {
     return this.catsService.findOne(id);
   }
 }
